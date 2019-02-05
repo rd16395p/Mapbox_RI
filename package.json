@@ -1,0 +1,22 @@
+{
+  "name": "mapbox",
+  "version": "1.0.0",
+  "description": "interactive map for randel's island",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/randallsisland/Mapbox.git"
+  },
+  "author": "Rebecca D'Agostino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/randallsisland/Mapbox/issues"
+  },
+  "homepage": "https://github.com/randallsisland/Mapbox#readme",
+  "dependencies": {
+    "mapbox-gl": "^0.53.0-beta.1"
+  }
+}
