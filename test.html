@@ -29,6 +29,16 @@
     cursor: pointer;
 
   }
+
+  .mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
     </style>
 </head>
 <body>
@@ -40,22 +50,9 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam1raG9jaCIsImEiOiJjanIwb2FiNHEwZmJjM3lxdXlwMGU3ZGRpIn0.UC2gbIAqSoJbWuZ1JyB-tw';
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/jmkhoch/cjr88nvga02h12spahytmij0c',
+  style: 'mapbox://styles/mapbox/light-v10',
   center: [-73.911464, 40.789793],
   zoom: 13.0
-});
-
-// add markers to map
-geojson.features.forEach(function(marker) {
-
-  // create a HTML element for each feature
-  var el = document.createElement('div');
-  el.className = 'marker';
-
-  // make a marker for each feature and add to the map
-  new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .addTo(map);
 });
 
 
@@ -80,7 +77,7 @@ var geojson = {
     },
     properties: {
       title: 'Bronx Kill - East End',
-      description: 'San Francisco, California'
+      description: 'One of the sampling sites'
     }
   },
   {
@@ -90,12 +87,29 @@ var geojson = {
       coordinates: [-73.9277841, 40.7909416]
     },
     properties: {
-      title: 'point',
-      description: 'here'
+      title: 'Little Hell Gate Salt Marsh',
+      description: 'One of the sampling Sites'
     }
   }
 ]
 };
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+    .addTo(map);
+
+
+});
 
 
 
