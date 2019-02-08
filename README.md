@@ -1,7 +1,7 @@
 # Mapbox
 Datasets with sampling points to be uploaded to Mapbox 
 
-Index.html = current index that is not updated
+Index.html = current index that is not updated  
 test.html = draft of new index
 
 NOTE:
