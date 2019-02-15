@@ -39,10 +39,52 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+#menu {
+background: #fff;
+position: absolute;
+z-index: 1;
+top: 10px;
+right: 10px;
+border-radius: 3px;
+width: 120px;
+border: 1px solid rgba(0,0,0,0.4);
+font-family: 'Open Sans', sans-serif;
+}
+
+#menu a {
+font-size: 13px;
+color: #404040;
+display: block;
+margin: 0;
+padding: 0;
+padding: 10px;
+text-decoration: none;
+border-bottom: 1px solid rgba(0,0,0,0.25);
+text-align: center;
+}
+
+#menu a:last-child {
+border: none;
+}
+
+#menu a:hover {
+background-color: #f8f8f8;
+color: #404040;
+}
+
+#menu a.active {
+background-color: #3887be;
+color: #ffffff;
+}
+
+#menu a.active:hover {
+background: #3074a4;
+}
+
     </style>
 </head>
 <body>
-
+<nav id="menu"></nav>
 <div id='map'></div>
 
 <script>
@@ -56,7 +98,7 @@ var map = new mapboxgl.Map({
 });
 
 
-var geojson = {
+var places = {
   type: 'FeatureCollection',
   features: [{
     type: 'Feature',
@@ -95,21 +137,96 @@ var geojson = {
 };
 
 // add markers to map
-geojson.features.forEach(function(marker) {
+//points.features.forEach(function(marker) {
 
   // create a HTML element for each feature
-  var el = document.createElement('div');
-  el.className = 'marker';
+  //var el = document.createElement('div');
+  //el.className = 'marker';
 
   // make a marker for each feature and add to the map
-  new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-      .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-    .addTo(map);
+  //new mapboxgl.Marker(el)
+    //.setLngLat(marker.geometry.coordinates)
+    //.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      //.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+  //  .addTo(map);
 
 
+//});
+
+map.on('load', function() {
+    map.addSource('places', {
+        "type": "geojson",
+        "data": places
+    });
+
+    map.addLayer({
+      "source": "places",
+      'id': 'places',
+'type': 'circle',
+"interactive": true,
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(55,148,179,1)'
+}
+    });
 });
+
+
+var toggleableLayerIds = ['places'];
+
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+var id = toggleableLayerIds[i];
+
+var link = document.createElement('a');
+link.href = '#';
+link.className = 'active';
+link.textContent = id;
+
+link.onclick = function (e) {
+var clickedLayer = this.textContent;
+e.preventDefault();
+e.stopPropagation();
+
+var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+if (visibility === 'visible') {
+map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+this.className = '';
+} else {
+this.className = 'active';
+map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+}
+};
+
+var layers = document.getElementById('menu');
+layers.appendChild(link);
+}
+
+
+    //major help - https://docs.mapbox.com/mapbox-gl-js/example/popup-on-click/
+    // https://docs.mapbox.com/help/tutorials/add-points-pt-3/
+    map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['places'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+    .setLngLat(feature.geometry.coordinates)
+    .addTo(map);
+});
+
+
 
 
 
