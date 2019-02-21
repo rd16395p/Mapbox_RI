@@ -175,7 +175,9 @@ map.on('load', function() {
 });
 
 
-var toggleableLayerIds = ['places'];
+
+
+var toggleableLayerIds = ['places','pollinator'];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
 var id = toggleableLayerIds[i];
@@ -210,7 +212,7 @@ layers.appendChild(link);
     // https://docs.mapbox.com/help/tutorials/add-points-pt-3/
     map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['places'] // replace this with the name of the layer
+    layers: ['places','pollinator'] // replace this with the name of the layer
   });
 
   if (!features.length) {
