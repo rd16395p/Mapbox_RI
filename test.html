@@ -1,44 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8' />
-    <title></title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
+<meta charset='utf-8' />
+<title>Randell's Island Data Points</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
 
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
-
-      .marker {
-    background-image: url('mapbox-icon.png');
-    background-size: cover;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-
-  }
-
-  .mapboxgl-popup {
-  max-width: 200px;
-}
-
-.mapboxgl-popup-content {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-}
-
+<style>
 #menu {
 background: #fff;
 position: absolute;
@@ -80,15 +55,12 @@ color: #ffffff;
 #menu a.active:hover {
 background: #3074a4;
 }
+</style>
 
-    </style>
-</head>
-<body>
 <nav id="menu"></nav>
-<div id='map'></div>
+<div id="map"></div>
 
 <script>
-
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam1raG9jaCIsImEiOiJjanIwb2FiNHEwZmJjM3lxdXlwMGU3ZGRpIn0.UC2gbIAqSoJbWuZ1JyB-tw';
 var map = new mapboxgl.Map({
   container: 'map',
@@ -96,7 +68,6 @@ var map = new mapboxgl.Map({
   center: [-73.911464, 40.789793],
   zoom: 13.0
 });
-
 
 var places = {
   type: 'FeatureCollection',
@@ -136,32 +107,15 @@ var places = {
 ]
 };
 
-// add markers to map
-//points.features.forEach(function(marker) {
+map.on('load', function () {
+  map.addSource('places', {
+      "type": "geojson",
+      "data": places
+  });
 
-  // create a HTML element for each feature
-  //var el = document.createElement('div');
-  //el.className = 'marker';
-
-  // make a marker for each feature and add to the map
-  //new mapboxgl.Marker(el)
-    //.setLngLat(marker.geometry.coordinates)
-    //.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-      //.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-  //  .addTo(map);
-
-
-//});
-
-map.on('load', function() {
-    map.addSource('places', {
-        "type": "geojson",
-        "data": places
-    });
-
-    map.addLayer({
-      "source": "places",
-      'id': 'places',
+  map.addLayer({
+    "source": "places",
+    'id': 'places',
 'type': 'circle',
 "interactive": true,
 'layout': {
@@ -171,13 +125,29 @@ map.on('load', function() {
 'circle-radius': 8,
 'circle-color': 'rgba(55,148,179,1)'
 }
-    });
+  });
+map.addSource('Vegetation', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8if770gxy2rpgqfjufj5e-6ofw0'
+});
+map.addLayer({
+'id': 'Vegetation',
+'type': 'circle',
+'source': 'Vegetation',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(0,128,0,1)'
+},
+'source-layer': 'Vegetation_Survey_Plots_LHGSM'
 });
 
 
+});
 
-
-var toggleableLayerIds = ['places','pollinator'];
+var toggleableLayerIds = [ 'places','Vegetation' ];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
 var id = toggleableLayerIds[i];
@@ -207,30 +177,25 @@ var layers = document.getElementById('menu');
 layers.appendChild(link);
 }
 
-
-    //major help - https://docs.mapbox.com/mapbox-gl-js/example/popup-on-click/
-    // https://docs.mapbox.com/help/tutorials/add-points-pt-3/
-    map.on('click', function(e) {
-  var features = map.queryRenderedFeatures(e.point, {
-    layers: ['places','pollinator'] // replace this with the name of the layer
-  });
-
-  if (!features.length) {
-    return;
-  }
-
-  var feature = features[0];
-
-  var popup = new mapboxgl.Popup({ offset: [0, -15] })
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
-    .setLngLat(feature.geometry.coordinates)
-    .addTo(map);
+//major help - https://docs.mapbox.com/mapbox-gl-js/example/popup-on-click/
+// https://docs.mapbox.com/help/tutorials/add-points-pt-3/
+map.on('click', function(e) {
+var features = map.queryRenderedFeatures(e.point, {
+layers: ['places'] // replace this with the name of the layer
 });
 
+if (!features.length) {
+return;
+}
 
+var feature = features[0];
 
-
+var popup = new mapboxgl.Popup({ offset: [0, -15] })
+.setLngLat(feature.geometry.coordinates)
+.setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+.setLngLat(feature.geometry.coordinates)
+.addTo(map);
+});
 
 </script>
 
