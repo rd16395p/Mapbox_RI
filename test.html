@@ -144,10 +144,118 @@ map.addLayer({
 'source-layer': 'Vegetation_Survey_Plots_LHGSM'
 });
 
+map.addSource('Birds', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8hlb90fdf2xpe9ajo1vdw-8rq11'
+});
+map.addLayer({
+'id': 'Birds',
+'type': 'circle',
+'source': 'Birds',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(225,225,0,1)'
+},
+'source-layer': 'Wading_Bird_Count_Survey_Points_'
+});
+
+map.addSource('Fish', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8g4sn0btk2wntepy64o3k-29zjm'
+});
+map.addLayer({
+'id': 'Fish',
+'type': 'circle',
+'source': 'Fish',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(0,0,255,1)'
+},
+'source-layer': 'Fish_Survey_Sites'
+});
+
+map.addSource('Vegetation_Bronx', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8f8xg0xpi2xl66fk8aogz-1q7ip'
+});
+map.addLayer({
+'id': 'Vegetation_Bronx',
+'type': 'circle',
+'source': 'Vegetation_Bronx',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(0,255,0,1)'
+},
+'source-layer': 'Vegetation_Survey_Plots_Bronx_Ki'
+});
+
+map.addSource('Oyster_Cages', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8eq7m116c2xmxg2riqgqr-6x6tv'
+});
+map.addLayer({
+'id': 'Oyster_Cages',
+'type': 'circle',
+'source': 'Oyster_Cages',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(128,128,128,1)'
+},
+'source-layer': 'Oyster_Cages'
+});
+
+map.addSource('Salt_Nutrients', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8btz70f4i2wpglvzxrbt5-1m0jn'
+});
+map.addLayer({
+'id': 'Salt_Nutrients',
+'type': 'circle',
+'source': 'Salt_Nutrients',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(128,0,128,1)'
+},
+'source-layer': 'NutrientCyclingStudy_SampleSites'
+});
+
+map.addSource('CWQT_pilot', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjr88d2gi056632qcm1k0sypj-3i9cy'
+});
+map.addLayer({
+'id': 'CWQT_pilot',
+'type': 'circle',
+'source': 'CWQT_pilot',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(128,128,0,1)'
+},
+'source-layer': 'CWQT_pilot'
+});
+
 
 });
 
-var toggleableLayerIds = [ 'places','Vegetation' ];
+var toggleableLayerIds = [ 'places','Vegetation','Birds','Fish','Vegetation_Bronx','Oyster_Cages','Salt_Nutrients','CWQT_pilot'];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
 var id = toggleableLayerIds[i];
