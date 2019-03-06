@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<title>Randell's Island Data Points</title>
+<title>Randall's Island Park-as-Lab Projects</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
@@ -10,6 +10,10 @@
 body { margin:0; padding:0; }
 #map { position:absolute; top:0; bottom:0; width:100%; }
 </style>
+<!-- http://letsforum.com/Thread-How-To-Do-A-JavaScript-Pop-Up-Welcome-Message : big help for this  -->
+<script type="text/javascript">
+alert("Welcome to the website! More text here... ");
+</script>
 </head>
 <body>
 
@@ -304,6 +308,8 @@ var popup = new mapboxgl.Popup({ offset: [0, -15] })
 .setLngLat(feature.geometry.coordinates)
 .addTo(map);
 });
+
+</script>
 
 </script>
 
