@@ -278,6 +278,78 @@ map.addLayer({
 });
 
 /*add completed ones here */
+map.addSource('Oyster-Substrate', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsvzh59w0gik32rsmgau3drp-60ebk'
+});
+map.addLayer({
+'id': 'Oyster-Substrate',
+'type': 'circle',
+'source': 'Oyster-Substrate',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,.5)'
+},
+'source-layer': 'Oyster-Substrate'
+});
+
+map.addSource('Fish-WQ-Project-2019', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsvzoelh06nh2wpdify23aus-3k9fj'
+});
+map.addLayer({
+'id': 'Fish-WQ-Project-2019',
+'type': 'circle',
+'source': 'Fish-WQ-Project-2019',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,.5)'
+},
+'source-layer': 'Fish-WQ-Project-2019'
+});
+
+map.addSource('Wild-Oyster-Survey', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsvzo5zq0iy82wrsjor40rkd-1l6yt'
+});
+map.addLayer({
+'id': 'Wild-Oyster-Survey',
+'type': 'circle',
+'source': 'Wild-Oyster-Survey',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,.5)'
+},
+'source-layer': 'Wild-Oyster-Survey'
+});
+
+map.addSource('Benthic-Macroinvertebrate-Survey', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsvznykb02t22so2eomqip06-24ueg'
+});
+map.addLayer({
+'id': 'Benthic-Macroinvertebrate-Survey',
+'type': 'circle',
+'source': 'Benthic-Macroinvertebrate-Survey',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,.5)'
+},
+'source-layer': 'Benthic-Macroinvertebrate-Survey'
+});
+
 
 map.addSource('Pollinator_Survey', {
 type: 'vector',
@@ -301,26 +373,10 @@ map.addLayer({
 
 });
 
-var layers = ['0-10', '10-20', '20-50', '50-100', '100-200', '200-500', '500-1000', '1000+'];
-var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
 
 
-for (i = 0; i < layers.length; i++) {
-  var layer = layers[i];
-  var color = colors[i];
-  var item = document.createElement('div');
-  var key = document.createElement('span');
-  key.className = 'legend-key';
-  key.style.backgroundColor = color;
-
-  var value = document.createElement('span');
-  value.innerHTML = layer;
-  item.appendChild(key);
-  item.appendChild(value);
-  legend.appendChild(item);
-}
-
-var toggleableLayerIds = [ 'places','Vegetation','Birds','Fish','Vegetation_Bronx','Oyster_Cages','Salt_Nutrients','CWQT_pilot'];
+var toggleableLayerIds = [ 'places','Vegetation','Birds','Fish','Vegetation_Bronx','Oyster_Cages','Salt_Nutrients','CWQT_pilot',
+'Oyster-Substrate','Fish-WQ-Project-2019','Wild-Oyster-Survey','Benthic-Macroinvertebrate-Survey','pollinator-survey'];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
 var id = toggleableLayerIds[i];
@@ -370,7 +426,24 @@ var popup = new mapboxgl.Popup({ offset: [0, -15] })
 .addTo(map);
 });
 
+var layers = ['0-10', '10-20', '20-50', '50-100', '100-200', '200-500', '500-1000', '1000+'];
+var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
 
+
+for (i = 0; i < layers.length; i++) {
+  var layer = layers[i];
+  var color = colors[i];
+  var item = document.createElement('div');
+  var key = document.createElement('span');
+  key.className = 'legend-key';
+  key.style.backgroundColor = color;
+
+  var value = document.createElement('span');
+  value.innerHTML = layer;
+  item.appendChild(key);
+  item.appendChild(value);
+  legend.appendChild(item);
+}
 
 
 
