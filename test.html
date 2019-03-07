@@ -59,8 +59,27 @@ color: #ffffff;
 #menu a.active:hover {
 background: #3074a4;
 }
+
+#legend {
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 18px;
+  height: 150px;
+  margin-bottom: 40px;
+  width: 100px;
+}
+
+.legend-key {
+  display: inline-block;
+  border-radius: 20%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}
+
 </style>
 
+<div class='map-overlay' id='legend'></div>
 <nav id="menu"></nav>
 <div id="map"></div>
 
@@ -72,6 +91,8 @@ var map = new mapboxgl.Map({
   center: [-73.911464, 40.789793],
   zoom: 13.0
 });
+
+
 
 var places = {
   type: 'FeatureCollection',
@@ -161,7 +182,7 @@ map.addLayer({
 },
 'paint': {
 'circle-radius': 8,
-'circle-color': 'rgba(225,225,0,1)'
+'circle-color': 'rgba(255,165,0,1)'
 },
 'source-layer': 'Wading_Bird_Count_Survey_Points_'
 });
@@ -179,7 +200,7 @@ map.addLayer({
 },
 'paint': {
 'circle-radius': 8,
-'circle-color': 'rgba(0,0,255,1)'
+'circle-color': 'rgba(255,165,0,1)'
 },
 'source-layer': 'Fish_Survey_Sites'
 });
@@ -197,7 +218,7 @@ map.addLayer({
 },
 'paint': {
 'circle-radius': 8,
-'circle-color': 'rgba(0,255,0,1)'
+'circle-color': 'rgba(0,128,0,1)'
 },
 'source-layer': 'Vegetation_Survey_Plots_Bronx_Ki'
 });
@@ -215,7 +236,7 @@ map.addLayer({
 },
 'paint': {
 'circle-radius': 8,
-'circle-color': 'rgba(128,128,128,1)'
+'circle-color': 'rgba(255,165,0,1)'
 },
 'source-layer': 'Oyster_Cages'
 });
@@ -233,7 +254,7 @@ map.addLayer({
 },
 'paint': {
 'circle-radius': 8,
-'circle-color': 'rgba(128,0,128,1)'
+'circle-color': 'rgba(0,0,255,1)'
 },
 'source-layer': 'NutrientCyclingStudy_SampleSites'
 });
@@ -251,13 +272,53 @@ map.addLayer({
 },
 'paint': {
 'circle-radius': 8,
-'circle-color': 'rgba(128,128,0,1)'
+'circle-color': 'rgba(0,0,255,1)'
 },
 'source-layer': 'CWQT_pilot'
 });
 
+/*add completed ones here */
+
+map.addSource('Pollinator_Survey', {
+type: 'vector',
+url: 'mapbox://jmkhoch.cjsg8eq7m116c2xmxg2riqgqr-6x6tv'
+});
+map.addLayer({
+'id': 'Pollinator_Survey',
+'type': 'circle',
+'source': 'Pollinator_Survey',
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,1)'
+},
+'source-layer': 'pollinator-survey'
+});
+
+
 
 });
+
+var layers = ['0-10', '10-20', '20-50', '50-100', '100-200', '200-500', '500-1000', '1000+'];
+var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
+
+
+for (i = 0; i < layers.length; i++) {
+  var layer = layers[i];
+  var color = colors[i];
+  var item = document.createElement('div');
+  var key = document.createElement('span');
+  key.className = 'legend-key';
+  key.style.backgroundColor = color;
+
+  var value = document.createElement('span');
+  value.innerHTML = layer;
+  item.appendChild(key);
+  item.appendChild(value);
+  legend.appendChild(item);
+}
 
 var toggleableLayerIds = [ 'places','Vegetation','Birds','Fish','Vegetation_Bronx','Oyster_Cages','Salt_Nutrients','CWQT_pilot'];
 
@@ -309,9 +370,15 @@ var popup = new mapboxgl.Popup({ offset: [0, -15] })
 .addTo(map);
 });
 
-</script>
+
+
+
+
+
 
 </script>
+
+
 
 </body>
 </html>
