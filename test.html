@@ -59,6 +59,19 @@ color: #ffffff;
 #menu a.active:hover {
 background: #3074a4;
 }
+/*
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  margin-right: 20px;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+  border-radius: 3px;
+}
+
+
 
 #legend {
   padding: 10px;
@@ -76,12 +89,50 @@ background: #3074a4;
   height: 10px;
   margin-right: 5px;
 }
+*/
+.legend {
+background-color: #fff;
+border-radius: 3px;
+bottom: 30px;
+box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+padding: 10px;
+position: absolute;
+right: 1200px;
+z-index: 1;
+}
+
+.legend h4 {
+margin: 0 0 10px;
+}
+
+.legend div span {
+border-radius: 50%;
+display: inline-block;
+height: 10px;
+margin-right: 5px;
+width: 20px;
+}
 
 </style>
 
-<div class='map-overlay' id='legend'></div>
+<!-- <div class='map-overlay' id='features'><h2>Randall's Island Park-as-Lab Projects</h2><div id='pd'><p>Here there can be more info..</p></div></div>
+<div class='map-overlay' id='legend'></div> -->
 <nav id="menu"></nav>
 <div id="map"></div>
+
+<div id='state-legend' class='legend'>
+<h4>Population</h4>
+<div><span style='background-color: rgba(0,128,0,1)'></span>Vegetation</div>
+<div><span style='background-color: rgba(255,165,0,1)'></span>Wildlife</div>
+<div><span style='background-color: rgba(0,0,255,1)'></span>Water Quailty</div>
+<div><span style='background-color: rgba(255,165,0,1)'></span>On going</div>
+<div><span style='background-color: rgba(255,165,0,.5)'></span>Completed</div>
+<!-- <div><span style='background-color: #DA9C20'></span>1,000,000</div>
+<div><span style='background-color: #E6B71E'></span>750,000</div>
+<div><span style='background-color: #EED322'></span>500,000</div>
+<div><span style='background-color: #F2F12D'></span>0</div> -->
+</div>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam1raG9jaCIsImEiOiJjanIwb2FiNHEwZmJjM3lxdXlwMGU3ZGRpIn0.UC2gbIAqSoJbWuZ1JyB-tw';
@@ -426,24 +477,37 @@ var popup = new mapboxgl.Popup({ offset: [0, -15] })
 .addTo(map);
 });
 
-var layers = ['0-10', '10-20', '20-50', '50-100', '100-200', '200-500', '500-1000', '1000+'];
-var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
 
+/*
+map.on('load', function() {
 
-for (i = 0; i < layers.length; i++) {
-  var layer = layers[i];
-  var color = colors[i];
-  var item = document.createElement('div');
-  var key = document.createElement('span');
-  key.className = 'legend-key';
-  key.style.backgroundColor = color;
+  var layers = ['0-10', '10-20', '20-50', '50-100', '100-200', '200-500', '500-1000', '1000+'];
+  var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
 
-  var value = document.createElement('span');
-  value.innerHTML = layer;
-  item.appendChild(key);
-  item.appendChild(value);
-  legend.appendChild(item);
-}
+  for (i = 0; i < layers.length; i++) {
+    var layer = layers[i];
+    var color = colors[i];
+    var item = document.createElement('div');
+    var key = document.createElement('span');
+    key.className = 'legend-key';
+    key.style.backgroundColor = color;
+
+    var value = document.createElement('span');
+    value.innerHTML = layer;
+    item.appendChild(key);
+    item.appendChild(value);
+    legend.appendChild(item);
+  }
+
+});
+*/
+var stateLegendEl = document.getElementById('state-legend');
+
+map.on('load',function() {
+
+stateLegendEl.style.display = '';
+
+});
 
 
 
