@@ -144,6 +144,136 @@ var map = new mapboxgl.Map({
 });
 
 
+var FishSurvey = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.932748, 40.789250]
+    },
+    properties: {
+      title: 'Fish & Crustacean Survey - Waterfront South',
+      description: 'Randalls Island Park staff, volunteers, and members of the public participated in monthly fish and crustacean monitoring at two locations on Randalls Island from 2015-2018. Data about fish and crustaceans around Randalls Island can be found here: '
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.927539, 40.790921]
+    },
+    properties: {
+      title: 'Fish & Crustacean Survey - Little Hell Gate Salt Marsh',
+      description: 'Randalls Island Park staff, volunteers, and members of the public participated in monthly fish and crustacean monitoring at two locations on Randalls Island from 2015-2018. In June and August, results are shared with the New York State Department of Environmental Conservation for the World Science Festival Great Fish Count and the Great Hudson River Estuary Fish Count. Data about fish and crustaceans around Randalls Island can be found here: '
+    }
+  }
+  ]
+};
+
+var HarborHerons = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.91517655830, 40.7963832352]
+    },
+    properties: {
+      title: 'Harbor Herons Project (7a)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9164355354, 40.7974563147]
+    },
+    properties: {
+      title: 'Harbor Herons Project (08)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9197443148, 40.7990954965]
+    },
+    properties: {
+      title: 'Harbor Herons Project (02)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9226568925, 40.8018636585]
+    },
+    properties: {
+      title: 'Harbor Herons Project (01)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+   {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9255272676, 40.80193226080]
+    },
+    properties: {
+      title: 'Harbor Herons Project (09)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+   {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9256915923, 40.79202659510]
+    },
+    properties: {
+      title: 'Harbor Herons Project (06)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.92729729490, 40.7914599696]
+    },
+    properties: {
+      title: 'Harbor Herons Project (05)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9272438955, 40.791557026]
+    },
+    properties: {
+      title: 'Harbor Herons Project (04)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-73.9349562408, 40.7830498663]
+    },
+    properties: {
+      title: 'Harbor Herons Project (03)',
+      description: 'Randalls Island Park staff and volunteers participated in bimonthly heron and egret monitoring at ten locations on Randalls Island from 2011-2018 in support of the New York City Audubon%27s Harbor Herons project. Data about herons and egrets around Randalls Island can be found here: '
+    }
+  }
+]
+};
 
 var places = {
   type: 'FeatureCollection',
@@ -202,6 +332,44 @@ map.on('load', function () {
 'circle-color': 'rgba(55,148,179,1)'
 }
   });
+  map.addSource('FishSurvey', {
+      "type": "geojson",
+      "data": FishSurvey
+  });
+
+  map.addLayer({
+    "source": "FishSurvey",
+    'id': 'FishSurvey',
+'type': 'circle',
+"interactive": true,
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,1)'
+}
+});
+map.addSource('HarborHerons', {
+    "type": "geojson",
+    "data": HarborHerons
+});
+
+map.addLayer({
+  "source": "HarborHerons",
+  'id': 'HarborHerons',
+'type': 'circle',
+"interactive": true,
+'layout': {
+'visibility': 'visible'
+},
+'paint': {
+'circle-radius': 8,
+'circle-color': 'rgba(255,165,0,1)'
+}
+  });
+
+/*
 map.addSource('Vegetation', {
 type: 'vector',
 url: 'mapbox://jmkhoch.cjsg8if770gxy2rpgqfjufj5e-6ofw0'
@@ -328,7 +496,6 @@ map.addLayer({
 'source-layer': 'CWQT_pilot'
 });
 
-/*add completed ones here */
 map.addSource('Oyster-Substrate', {
 type: 'vector',
 url: 'mapbox://jmkhoch.cjsvzh59w0gik32rsmgau3drp-60ebk'
@@ -420,14 +587,17 @@ map.addLayer({
 'source-layer': 'pollinator-survey'
 });
 
-
+*/
 
 });
 
 
 
-var toggleableLayerIds = [ 'places','Vegetation','Birds','Fish','Vegetation_Bronx','Oyster_Cages','Salt_Nutrients','CWQT_pilot',
-'Oyster-Substrate','Fish-WQ-Project-2019','Wild-Oyster-Survey','Benthic-Macroinvertebrate-Survey','pollinator-survey'];
+/*var toggleableLayerIds = [ 'places','Vegetation','Birds','Fish','Vegetation_Bronx','Oyster_Cages','Salt_Nutrients','CWQT_pilot',
+'Oyster-Substrate','Fish-WQ-Project-2019','Wild-Oyster-Survey','Benthic-Macroinvertebrate-Survey','pollinator-survey',
+'FishSurvey'];*/
+
+var toggleableLayerIds = [ 'places','FishSurvey','HarborHerons'];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
 var id = toggleableLayerIds[i];
@@ -461,7 +631,7 @@ layers.appendChild(link);
 // https://docs.mapbox.com/help/tutorials/add-points-pt-3/
 map.on('click', function(e) {
 var features = map.queryRenderedFeatures(e.point, {
-layers: ['places'] // replace this with the name of the layer
+layers: ['places','FishSurvey','HarborHerons'] // replace this with the name of the layer
 });
 
 if (!features.length) {
@@ -514,8 +684,6 @@ stateLegendEl.style.display = '';
 
 
 </script>
-
-
 
 </body>
 </html>
