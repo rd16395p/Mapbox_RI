@@ -10,9 +10,10 @@
 body { margin:0; padding:0; }
 #map { position:absolute; top:0; bottom:0; width:100%; }
 </style>
-<!-- http://letsforum.com/Thread-How-To-Do-A-JavaScript-Pop-Up-Welcome-Message : big help for this  -->
+<!-- http://letsforum.com/Thread-How-To-Do-A-JavaScript-Pop-Up-Welcome-Message : big help for this  
+https://stackoverflow.com/questions/17470817/format-the-text-in-javascript-alert-box for formatting tips-->
 <script type="text/javascript">
-alert("Welcome to the website! More text here... ");
+alert("About this map  \nRandall’s Island Park-as-Lab Interactive Map 2019  \n\nOur interactive map visualizes locations at which ongoing and completed environmental monitoring or academic partner projects at Randall’s Island Park are conducted. Since 2011, students, professional researchers, RIPA staff, and volunteers have participated in a variety of community science and research projects related to urban ecology and environmental science. The map serves as a repository of all these research efforts. Users can locate sites where researchers have collected data related to water quality, vegetation, and wildlife on and around Randall’s Island. Information associated with each point directs the user to corresponding datasets, reports, and/or posters on the Randall’s Island Park Alliance website that are available for download.  \n \nHow to use this map  \nVisualize points where research is conducted on Randall’s Island using the panel to the right. You can turn layers on and off using the Wildlife, Water Quality and Vegetation buttons. This allows you to visualize a portion of or all of the projects on Randall’s Island depending on your interest.  \n\nDownload datasets, reports, and posters. \nBy clicking on an individual point, you can see the project name and description. There is also a link to materials (datasets, reports, or posters) that contains or uses data collected at the location of the point. All of these materials are available for download.   \n\nAbout the Park-as-Lab Program \nRIPA’s vision for Park-as-Lab is a research collaborative where scientists, environmental advocates, and communities work together on scientific research. Park-as-Lab works to encourage civic engagement, support STEM career paths, and increase our understanding of New York City’s ecosystems, ultimately promoting more resilient communities.  \nThrough promoting opportunities to participate in and increase understanding of scientific research, Park-as-Lab aims to: \n\tFacilitate applied environmental science and ecology research on Randall’s Island  \n\tSupport community needs by promoting public participation in science research from conception to implementation  \n\tFoster partnerships through continued engagement and communication  \n\nWhat does the Park-as-Lab program do?  \n\nUrban Ecology Research  \nThrough the Park-as-Lab Program, researchers from high school, college, and graduate to professional levels use Randall’s Island as a site to explore scientific questions related to environmental science and urban ecology. Student researchers, with an adviser from their school, conduct independent research projects or assist with a long-term monitoring project on the Island. Topics range from the impact of water quality on fish community composition to evaluating the ability of plants and soil microbes to remediate soil. RIPA also asks for input from local stakeholders so that research through Park-as-Lab reflects community-identified needs and interests.  \n\nEnvironmental Monitoring & Community Engagement  \nRIPA works to connect youth and adults to the Island through environmental monitoring. Interested students, individuals, and organizations have opportunities to work with RIPA’s Natural Areas Department and participate in monitoring projects, such as counting and identifying the fish species that live in our waterways and tagging monarch butterflies migrating through New York City. Staff and volunteers collect data to contribute to larger citywide and regional projects that improve our understanding of local ecosystems. Check out RIPA’s website for opportunities to participate in Park-as-Lab events and environmental monitoring activities.  \n\nOutreach & Online Resources  \nRIPA works with partner organizations to ensure that research on Randall’s Island is informed by and benefits the surrounding communities. Data and reports from research and monitoring projects are shared on RIPA’s website. Attend a data interpretation workshop, view our summary reports, or check out lesson plans to learn about how you can use data available on our website and what they mean to you.    \n\nContact \nFor more info, to get involved, or to view data and reports, visit the Park-as-Lab page at www.randallsisland.org or contact our Park-as-Lab Program Coordinator at naturalareas@randallsisland.org or (212) 860-1899. \n\nCredits  \nRebecca D’Agostino (Pace University)  ");
 </script>
 </head>
 <body>
@@ -221,7 +222,6 @@ var Water_Quality = {
     }
 ]
 };
-
 var Vegetation = {
   type: 'FeatureCollection',
   features: [{
@@ -534,8 +534,6 @@ var Vegetation = {
 }
 ]
 };
-
-
 var Wildlife = {
   type: 'FeatureCollection',
   features: [{
@@ -910,7 +908,6 @@ var Wildlife = {
     properties: {
       title: 'Vertebrate scavenging along an urbanization gradient',
       description: 'The effects of urbanization on the vertebrate scavenger community, feeding behaviors, and the ecosystem services scavengers provide is poorly understood. The goal of this project was to study the vertebrate scavenger community and carcass removal rates along a 400-mile urbanization gradient in New York St'
-
 }
 },
 {
@@ -926,7 +923,6 @@ var Wildlife = {
   }
 ]
 };
-
 map.on('load', function () {
   map.addSource('Water_Quality', {
       "type": "geojson",
@@ -980,10 +976,7 @@ map.on('load', function () {
 'circle-color': 'rgba(163, 109, 155, 1)'
 }
   });
-
-
 });
-
 var toggleableLayerIds = [ 'Water_Quality','Vegetation','Wildlife']
 for (var i = 0; i < toggleableLayerIds.length; i++) {
 var id = toggleableLayerIds[i];
@@ -1050,3 +1043,4 @@ stateLegendEl.style.display = '';
 
 </body>
 </html>
+
