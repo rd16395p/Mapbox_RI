@@ -1,1 +1,1 @@
-![Screenshot](welcome.png)
+![Screenshot](welcome.PNG)
